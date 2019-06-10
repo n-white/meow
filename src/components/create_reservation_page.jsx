@@ -68,10 +68,10 @@ export default class CreateReservationPage extends React.PureComponent {
   }
 
   getUnavailableRoomIds() {
+    const { selectedStartDate, selectedEndDate } = this.state;
     return _.uniq(
       _.map(
         _.filter(this.props.reservations, room => {
-          const { selectedStartDate, selectedEndDate } = this.state;
           if (!selectedStartDate || !selectedEndDate) {
             return false;
           }
@@ -147,6 +147,7 @@ export default class CreateReservationPage extends React.PureComponent {
         <Button
           variant="contained"
           color="primary"
+          className={'createReservation-create-button'}
           onClick={this.createReservation}
         >
           Create Reservation

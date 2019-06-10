@@ -9,6 +9,9 @@ import '../styles/login_page.css';
 import User from '../domain/user';
 
 axios.defaults.withCredentials = true;
+
+// NOTE: I allowed these since this is just a development app
+// would not allow in production
 const LOGIN_OPTIONS = {
   'Access-Control-Allow-Credentials': true,
   'Access-Control-Allow-Headers':
@@ -22,7 +25,11 @@ export default class LoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    _.bindAll(this, ['requestLogin']);
+    _.bindAll(this, ['requestLogin', 'handleNameChange']);
+
+    this.state = {
+      userName: '',
+    }
   }
 
   requestLogin() {
@@ -30,6 +37,8 @@ export default class LoginPage extends React.PureComponent {
       return;
     }
 
+    // NOTE: I've hard coded the domain for my axios requests
+    // I'd use an environment variable in the real world
     axios
       .post(
         'http://localhost:1337/user',
@@ -44,11 +53,16 @@ export default class LoginPage extends React.PureComponent {
       );
   }
 
+  handleNameChange(event) {
+    this.setState({ userName: event.target.value });
+  }
+
   render() {
     return (
       <div className={'login-container'}>
         <div className={'login-input-container'}>
           <Input
+            className={'login-input'}
             type="text"
             value={this.state.userName}
             onChange={this.handleNameChange}

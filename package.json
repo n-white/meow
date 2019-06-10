@@ -29,7 +29,8 @@
     "react-scripts": "3.0.0",
     "sqlite3": "^4.0.8",
     "supertest": "^4.0.2",
-    "urlsafe-base64": "^1.0.0"
+    "urlsafe-base64": "^1.0.0",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "run-p start:client start:server",

@@ -41,7 +41,7 @@ export default function Reservation({
 }
 
 Reservation.propTypes = {
-  reservationId: PropTypes.number.isRequired,
+  reservationId: PropTypes.string.isRequired,
   roomName: PropTypes.string.isRequired,
   start: PropTypes.instanceOf(Date).isRequired,
   end: PropTypes.instanceOf(Date).isRequired,

@@ -9,7 +9,7 @@ import LoginPage from './login_page';
 import Nav from './nav';
 import Reservation from '../domain/reservation';
 import Room from '../domain/room';
-import { newId } from '../id_generator';
+const uuidv4 = require('uuid/v4')
 
 export const APP_VIEW = {
   CURRENT_RESERVATIONS: 'CURRENT_RESERVATIONS',
@@ -44,6 +44,8 @@ export default class AppStateContainer extends React.PureComponent {
   }
 
   onCancelReservation(reservationId) {
+    // NOTE: I decided to just use callbacks instead of promises
+    // since there is only one callback
     axios
       .post('http://localhost:1337/reservations/cancel', { reservationId })
       .then(
@@ -84,7 +86,7 @@ export default class AppStateContainer extends React.PureComponent {
 
   onCreateReservation({ start, end, roomId, guestId }) {
     const newReservation = new Reservation({
-      id: newId(),
+      id: uuidv4(),
       roomId,
       guestId,
       start,

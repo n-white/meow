@@ -7,20 +7,22 @@ import { APP_VIEW } from './app_state_container';
 export default class Nav extends React.PureComponent {
   render() {
     return (
-      <div className="">
+      <div className="nav">
         <Button
           color="primary"
+          className={'nav-current-reservations'}
           onClick={() => this.props.updateView(APP_VIEW.CURRENT_RESERVATIONS)}
         >
           {`Current reservations (${this.props.reservationCount})`}
         </Button>
         <Button
           color="primary"
+          className={'nav-create-reservations'}
           onClick={() => this.props.updateView(APP_VIEW.CREATE_RESERVATIONS)}
         >
           Reserve a room
         </Button>
-        <Button color="primary" onClick={this.props.onLogout}>
+        <Button color="primary" className={'nav-logout'} onClick={this.props.onLogout}>
           Logout
         </Button>
       </div>
