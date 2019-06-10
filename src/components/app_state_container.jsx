@@ -12,7 +12,7 @@ import Room from '../domain/room';
 import { newId } from '../id_generator';
 
 export const APP_VIEW = {
-  VIEW_RESERVATIONS: 'VIEW_RESERVATIONS',
+  CURRENT_RESERVATIONS: 'CURRENT_RESERVATIONS',
   CREATE_RESERVATIONS: 'CREATE_RESERVATIONS',
   LOGIN: 'LOGIN',
 };
@@ -108,7 +108,7 @@ export default class AppStateContainer extends React.PureComponent {
   }
 
   loginUser(user) {
-    this.setState({ user: user, view: APP_VIEW.VIEW_RESERVATIONS });
+    this.setState({ user: user, view: APP_VIEW.CURRENT_RESERVATIONS });
 
     axios.get('http://localhost:1337/rooms', { withCredentials: true }).then(
       result => {
@@ -135,7 +135,7 @@ export default class AppStateContainer extends React.PureComponent {
     switch (view) {
       case APP_VIEW.LOGIN:
         return <LoginPage loginUser={this.loginUser} />;
-      case APP_VIEW.VIEW_RESERVATIONS:
+      case APP_VIEW.CURRENT_RESERVATIONS:
         return (
           <CurrentReservationsPage
             rooms={rooms}
@@ -160,10 +160,7 @@ export default class AppStateContainer extends React.PureComponent {
 
   renderNav() {
     const { view, reservations, user } = this.state;
-    const userReservations = _.filter(
-      reservations,
-      r => r.guestId === _.get(user, 'name')
-    );
+    const userReservations = _.filter(reservations, r => r.guestId === _.get(user, 'name'));
     const reservationCount = userReservations ? userReservations.length : 0;
 
     if (view === APP_VIEW.LOGIN) {

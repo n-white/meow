@@ -10,7 +10,7 @@ export default class Nav extends React.PureComponent {
       <div className="">
         <Button
           color="primary"
-          onClick={() => this.props.updateView(APP_VIEW.VIEW_RESERVATIONS)}
+          onClick={() => this.props.updateView(APP_VIEW.CURRENT_RESERVATIONS)}
         >
           {`Current reservations (${this.props.reservationCount})`}
         </Button>

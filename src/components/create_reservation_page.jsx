@@ -33,8 +33,7 @@ export default class CreateReservationPage extends React.PureComponent {
 
   createReservation() {
     const { selectedRoomId, selectedStartDate, selectedEndDate } = this.state;
-    const hasMissingValue =
-      !selectedRoomId || !selectedStartDate || !selectedEndDate;
+    const hasMissingValue = !selectedRoomId || !selectedStartDate || !selectedEndDate;
 
     if (hasMissingValue) {
       this.setState({
@@ -59,10 +58,10 @@ export default class CreateReservationPage extends React.PureComponent {
     this.setState({ errorMessage: '' });
 
     this.props.onCreateReservation({
-      roomId: selectedRoomId,
-      guestId: this.props.user.name,
-      start: selectedStartDate,
       end: selectedEndDate,
+      guestId: this.props.user.name,
+      roomId: selectedRoomId,
+      start: selectedStartDate,
     });
 
     this.setState({ selectedStartDate: null, selectedEndDate: null });

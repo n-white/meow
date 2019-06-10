@@ -9,57 +9,35 @@ import '../styles/login_page.css';
 import User from '../domain/user';
 
 axios.defaults.withCredentials = true;
+const LOGIN_OPTIONS = {
+  'Access-Control-Allow-Credentials': true,
+  'Access-Control-Allow-Headers':
+    'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
+  'Access-Control-Allow-Methods':
+    'HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE',
+  'Access-Control-Allow-Origin': 'http://localhost:1337',
+};
 
 export default class LoginPage extends React.PureComponent {
   constructor(props) {
     super(props);
 
-    this.state = {
-      isLoggedIn: false,
-      userName: '',
-    };
-
-    _.bindAll(this, ['handleNameChange', 'submitName']);
+    _.bindAll(this, ['requestLogin']);
   }
 
-  componentDidMount() {
-    axios.get('http://localhost:1337').then(
-      result => {
-        this.setState({ isLoggedIn: true });
-      },
-      error => console.log(error)
-    );
-  }
-
-  handleNameChange(event) {
-    this.setState({ userName: event.target.value });
-  }
-
-  submitName() {
+  requestLogin() {
     if (!this.state.userName) {
       return;
     }
-
-    let options = {
-      'Access-Control-Allow-Credentials': true,
-      'Access-Control-Allow-Headers':
-        'Access-Control-*, Origin, X-Requested-With, Content-Type, Accept, Authorization',
-      'Access-Control-Allow-Methods':
-        'HEAD, GET, POST, OPTIONS, PUT, PATCH, DELETE',
-      'Access-Control-Allow-Origin': 'http://localhost:1337',
-    };
 
     axios
       .post(
         'http://localhost:1337/user',
         { userName: this.state.userName },
-        options
+        LOGIN_OPTIONS
       )
       .then(
         result => {
-          this.setState({
-            isLoggedIn: true,
-          });
           this.props.loginUser(new User({ name: this.state.userName }));
         },
         error => console.log(error)
@@ -81,7 +59,7 @@ export default class LoginPage extends React.PureComponent {
         <Button
           variant="contained"
           color="primary"
-          onClick={this.submitName}
+          onClick={this.requestLogin}
           className={'login-button'}
         >
           login
