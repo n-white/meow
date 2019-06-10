@@ -55,7 +55,7 @@ app.post('/reservations/add', (req, res) => {
       }      
     });
   } else {
-    res.status(401).send('please log in');
+    res.status(401).send(req.session);
   }
 });
 

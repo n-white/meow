@@ -24,7 +24,7 @@ export default class AppStateContainer extends React.PureComponent {
     this.state = {
       rooms: [],
       view: APP_VIEW.LOGIN,
-      user: '',
+      user: {},
       reservations: [],
     };
 

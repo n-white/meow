@@ -42,7 +42,7 @@ export default class CreateReservationPage extends React.PureComponent {
       });
     }
 
-    const hasInvalidDateRange = selectedStartDate > selectedEndDate;
+    const hasInvalidDateRange = selectedStartDate >= selectedEndDate;
 
     if (hasInvalidDateRange) {
       this.setState({
